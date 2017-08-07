@@ -152,8 +152,8 @@ class set {
 
   template<typename InputIterator>
   void
-  insert(InputIterator first,InputIterator last) {
-    mT.DoInsertUnique(first,last);
+  insert(InputIterator first, InputIterator last) {
+    mT.DoInsertUnique(first, last);
   }
 
   void
@@ -290,7 +290,7 @@ operator>=(const set<Key, Compare, Allocator>& x,
 template<typename Key, typename Compare, typename Allocator>
 inline void
 swap(set<Key, Compare, Allocator>& x, set<Key, Compare, Allocator>& y) {
- x.swap(y);
+  x.swap(y);
 }
 
 }  // namespace jnstl

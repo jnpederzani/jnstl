@@ -106,9 +106,11 @@ struct ListConstIterator {
 
   ListConstIterator()
       : mNode(nullptr) {}
+
   explicit
   ListConstIterator(const node_type* pNode)
       : mNode(pNode) {}
+
   ListConstIterator(const iterator& rhs)
       : mNode(rhs.mNode) {}
 

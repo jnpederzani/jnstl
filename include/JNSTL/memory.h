@@ -1,7 +1,7 @@
 #ifndef JNSTL_MEMORY_H_
 #define JNSTL_MEMORY_H_
 
-//#include <type_traits>
+// #include <type_traits>
 #include "JNSTL/bits/config.h"
 
 #include "JNSTL/algorithm.h"

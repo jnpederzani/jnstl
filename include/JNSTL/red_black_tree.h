@@ -35,28 +35,28 @@ struct rbtree_node_base {
 
   static node_base_type*
   sMinimum(node_base_type* x) {
-    while(x->mLeft != nullptr)
+    while (x->mLeft != nullptr)
       x = x->mLeft;
     return x;
   }
 
   static const_node_base_type*
   sMinimum(const_node_base_type* x) {
-    while(x->mLeft != nullptr)
+    while (x->mLeft != nullptr)
       x = x->mLeft;
     return x;
   }
 
   static node_base_type*
   sMaximum(node_base_type* x) {
-    while(x->mRight != nullptr)
+    while (x->mRight != nullptr)
       x = x->mRight;
     return x;
   }
 
   static const_node_base_type*
   sMaximum(const_node_base_type* x) {
-    while(x->mRight != nullptr)
+    while (x->mRight != nullptr)
       x = x->mRight;
     return x;
   }
@@ -206,27 +206,27 @@ struct rbtree_const_iterator {
 
   this_type&
   operator++() {
-    mNode =static_cast<node_type*>(RBTreeIncrement(mNode));
+    mNode = static_cast<node_type*>(RBTreeIncrement(mNode));
     return *this;
   }
 
   this_type
   operator++(int) {
     this_type temp(*this);
-    mNode =static_cast<node_type*>(RBTreeIncrement(mNode));
+    mNode = static_cast<node_type*>(RBTreeIncrement(mNode));
     return temp;
   }
 
   this_type&
   operator--() {
-    mNode =static_cast<node_type*>(RBTreeDecrement(mNode));
+    mNode = static_cast<node_type*>(RBTreeDecrement(mNode));
     return *this;
   }
 
   this_type
   operator--(int) {
     this_type temp(*this);
-    mNode =static_cast<node_type*>(RBTreeDecrement(mNode));
+    mNode = static_cast<node_type*>(RBTreeDecrement(mNode));
     return temp;
   }
 
@@ -250,12 +250,13 @@ class rbtree {
   typedef const rbtree_node_base          const_node_base_type;
   typedef       rbtree_node_base*               node_base_type_ptr;
   typedef const rbtree_node_base*         const_node_base_type_ptr;
+
  public:
   typedef Key                             key_type;
   typedef T                               value_type;
   typedef       rbtree_node<T>                  node_type;
   typedef const rbtree_node<T>            const_node_type;
-  //typedef       rbtree_node<T>*                 node_type_ptr;
+  // typedef       rbtree_node<T>*                 node_type_ptr;
   typedef        value_type*                     pointer;
   typedef const value_type*               const_pointer;
   typedef       value_type&                     reference;
@@ -273,9 +274,9 @@ class rbtree {
   rbtree(const Compare& compare,
          const allocator_type& allocator = allocator_type{});
 
-  //  template <typename InputIterator>
-  //rbtree(InputIterator first, InputIterator last, const Compare& compare,
-  //       const allocator_type& allocator = allocator_type{});
+  // template <typename InputIterator>
+  // rbtree(InputIterator first, InputIterator last, const Compare& compare,
+  //        const allocator_type& allocator = allocator_type{});
 
   rbtree(const this_type& x);
   rbtree(this_type&& x);
@@ -373,6 +374,7 @@ class rbtree {
       mHeader.mParent = nullptr;
       mSize           = 0;
     }
+
    private:
     void
     DoInit() {
@@ -564,17 +566,17 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::rbtree(
     const Compare& compare, const allocator_type& allocator)
     : mImpl(compare, allocator) {}
 
-//template <typename Key, typename T, typename KeyOfT,
+//  template <typename Key, typename T, typename KeyOfT,
 //          typename Compare, typename Allocator>
-//template <typename InputIterator>
-//inline
-//rbtree<Key, T, KeyOfT, Compare, Allocator>::rbtree(
+//  template <typename InputIterator>
+//  inline
+//  rbtree<Key, T, KeyOfT, Compare, Allocator>::rbtree(
 //    InputIterator first, InputIterator last,
 //    const Compare& compare, const allocator_type& allocator)
 //    : mImpl(compare, allocator) {
 //
 //
-//}
+// }
 
 template <typename Key, typename T, typename KeyOfT,
           typename Compare, typename Allocator>
@@ -728,11 +730,11 @@ template <typename Key, typename T, typename KeyOfT,
 inline typename rbtree<Key, T, KeyOfT, Compare, Allocator>::iterator
 rbtree<Key, T, KeyOfT, Compare, Allocator>::erase(
     const_iterator first, const_iterator last) {
-  //int error = 0;
+  // int error = 0;
   while (first != last) {
     first = erase(first);
-    //if (!validate())
-    //error++;
+    // if (!validate())
+    // error++;
   }
   return iterator(const_cast<node_type*>(first.mNode));
 }
@@ -744,10 +746,10 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::erase(
     const key_type& key) {
   pair<iterator, iterator> p = equal_range(key);
   const size_type old_size = size();
-  //int error = 0;
+  // int error = 0;
   erase(p.first, p.second);
-  //if (!validate())
-  //error++;
+  // if (!validate())
+  // error++;
   return old_size - size();
 }
 
@@ -838,12 +840,10 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::equal_range(
   while (x != nullptr) {
     if (mImpl.KeyCompare(sKey(x), key)) {
         x = sRight(x);
-    }
-    else if (mImpl.KeyCompare(key, sKey(x))) {
+    } else if (mImpl.KeyCompare(key, sKey(x))) {
       y = x;
       x = sLeft(x);
-    }
-    else {
+    } else {
       node_type* xu(x);
       node_type* yu(y);
       y = x;
@@ -869,12 +869,10 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::equal_range(
   while (x != nullptr) {
     if (mImpl.KeyCompare(sKey(x), key)) {
         x = sRight(x);
-    }
-    else if (mImpl.KeyCompare(key, sKey(x))) {
+    } else if (mImpl.KeyCompare(key, sKey(x))) {
       y = x;
       x = sLeft(x);
-    }
-    else {
+    } else {
       const_node_type* xu(x);
       const_node_type* yu(y);
       y = x;
@@ -893,11 +891,11 @@ template <typename Key, typename T, typename KeyOfT,
           typename Compare, typename Allocator>
 bool
 rbtree<Key, T, KeyOfT, Compare, Allocator>::validate() const {
-  if(mImpl.mSize) {
-    if(mImpl.mHeader.mLeft != sMinimum(mImpl.mHeader.mParent))
+  if (mImpl.mSize) {
+    if (mImpl.mHeader.mLeft != sMinimum(mImpl.mHeader.mParent))
       return false;
 
-    if(mImpl.mHeader.mRight != sMaximum(mImpl.mHeader.mParent))
+    if (mImpl.mHeader.mRight != sMaximum(mImpl.mHeader.mParent))
       return false;
 
     size_t nBlackCount = RBTreeBlackCount(mImpl.mHeader.mParent,
@@ -909,64 +907,54 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::validate() const {
 
     size_type     nIteratedSize = 0;
 
-    for(const_iterator it = begin(); it != end(); ++it, ++nIteratedSize)
-    {
+    for  (const_iterator it = begin(); it != end(); ++it, ++nIteratedSize) {
       const node_type* const pNode      = (const node_type*)it.mNode;
       const node_type* const pNodeRight = (const node_type*)pNode->mRight;
       const node_type* const pNodeLeft  = (const node_type*)pNode->mLeft;
 
-      if(pNodeRight && mImpl.KeyCompare(sKey(pNodeRight),
-                                        sKey(pNode)) &&
-         mImpl.KeyCompare(sKey(pNode),
-                          sKey(pNodeRight)))
+      if (pNodeRight && mImpl.KeyCompare(sKey(pNodeRight), sKey(pNode)) &&
+          mImpl.KeyCompare(sKey(pNode), sKey(pNodeRight)))
         return false;
 
-      if(pNodeLeft && mImpl.KeyCompare(sKey(pNodeLeft),
-                                       sKey(pNode)) &&
-         mImpl.KeyCompare(sKey(pNode),
-                          sKey(pNodeLeft)))
+      if (pNodeLeft && mImpl.KeyCompare(sKey(pNodeLeft), sKey(pNode)) &&
+          mImpl.KeyCompare(sKey(pNode), sKey(pNodeLeft)))
         return false;
 
       // Verify item #1 above.
-      if((pNode->mColor != mRed) && (pNode->mColor != mBlack))
+      if ((pNode->mColor != mRed) && (pNode->mColor != mBlack))
         return false;
 
       // Verify item #3 above.
-      if(pNode->mColor == mRed)
-      {
-        if((pNodeRight && (pNodeRight->mColor == mRed)) ||
-           (pNodeLeft  && (pNodeLeft->mColor  == mRed)))
+      if (pNode->mColor == mRed) {
+        if ((pNodeRight && (pNodeRight->mColor == mRed)) ||
+            (pNodeLeft  && (pNodeLeft->mColor  == mRed)))
           return false;
       }
 
       // Verify item #6 above.
-      if(pNodeRight && mImpl.KeyCompare(sKey(pNodeRight),
-                                        sKey(pNode)))
+      if (pNodeRight && mImpl.KeyCompare(sKey(pNodeRight), sKey(pNode)))
         return false;
 
-      if(pNodeLeft && mImpl.KeyCompare(sKey(pNode),
-                                       sKey(pNodeLeft)))
+      if (pNodeLeft && mImpl.KeyCompare(sKey(pNode), sKey(pNodeLeft)))
         return false;
 
-      if(!pNodeRight && !pNodeLeft) // If we are at a bottom node of the tree...
-      {
+      // If we are at a bottom node of the tree...
+      if (!pNodeRight && !pNodeLeft) {
         // Verify item #4 above.
         node_base_type* y = static_cast<node_base_type*>(const_cast<node_type*>(pNode));
-        if(RBTreeBlackCount(mImpl.mHeader.mParent, y) != nBlackCount)
+        if (RBTreeBlackCount(mImpl.mHeader.mParent, y) != nBlackCount)
           return false;
       }
     }
 
     // Verify item #5 above.
-    if(nIteratedSize != mImpl.mSize)
+    if (nIteratedSize != mImpl.mSize)
       return false;
 
     return true;
-  }
-  else
-  {
-    if((mImpl.mHeader.mLeft != &mImpl.mHeader) ||
-       (mImpl.mHeader.mRight != &mImpl.mHeader))
+  } else {
+    if ((mImpl.mHeader.mLeft != &mImpl.mHeader) ||
+        (mImpl.mHeader.mRight != &mImpl.mHeader))
       return false;
   }
 
@@ -979,7 +967,7 @@ bool
 rbtree<Key, T, KeyOfT, Compare, Allocator>::validate_iterator(const_iterator i) const {
   const_iterator temp = begin();
   const_iterator tempEnd = end();
-  for (; temp != tempEnd; ++ temp) {
+  for (; temp != tempEnd; ++temp) {
     if (temp == i)
       return (isf_valid | isf_current | isf_can_dereference);
   }
@@ -991,7 +979,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::validate_iterator(const_iterator i) 
 
 template <typename Key, typename T, typename KeyOfT,
           typename Compare, typename Allocator>
-pair<typename rbtree<Key, T, KeyOfT, Compare, Allocator>::iterator,bool>
+pair<typename rbtree<Key, T, KeyOfT, Compare, Allocator>::iterator, bool>
 rbtree<Key, T, KeyOfT, Compare, Allocator>::DoInsertUnique(
     const value_type& value) {
   node_base_type_ptr parent;
@@ -1034,7 +1022,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::DoInsertUnique(
     InputIterator first, InputIterator last) {
   for (; first != last; ++first)
     DoInsertUnique(end(), *first);
-  //DoInsertUnique(*first);
+  // DoInsertUnique(*first);
 }
 
 template <typename Key, typename T, typename KeyOfT,
@@ -1168,8 +1156,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::LowerBound(
     if (!mImpl.KeyCompare(sKey(x), key)) {
       y = x;
       x = sLeft(x);
-    }
-    else {
+    } else {
       x = sRight(x);
     }
   }
@@ -1186,8 +1173,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::LowerBound(
     if (!mImpl.KeyCompare(sKey(x), key)) {
       y = x;
       x = sLeft(x);
-    }
-    else {
+    } else {
       x = sRight(x);
     }
   }
@@ -1204,8 +1190,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::UpperBound(
     if (mImpl.KeyCompare(key, sKey(x))) {
       y = x;
       x = sLeft(x);
-    }
-    else {
+    } else {
       x = sRight(x);
     }
   }
@@ -1222,8 +1207,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::UpperBound(
     if (mImpl.KeyCompare(key, sKey(x))) {
       y = x;
       x = sLeft(x);
-    }
-    else {
+    } else {
       x = sRight(x);
     }
   }
@@ -1267,7 +1251,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::FindEqual(
     } else {
       return FindEqual(pParent, key);
     }
-  } else if ( mImpl.KeyCompare(key, sKey(hint.mNode))) {
+  } else if (mImpl.KeyCompare(key, sKey(hint.mNode))) {
     //  key < *hint
     const_iterator prior = hint;
     if (hint == begin() || mImpl.KeyCompare(sKey((--prior).mNode), key)) {
@@ -1295,7 +1279,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::FindEqual(
             const_cast<node_type*>(hint.mNode));
         return pParent->mRight;
       } else {
-        pParent =static_cast<node_base_type_ptr>(
+        pParent = static_cast<node_base_type_ptr>(
             const_cast<node_type*>(next.mNode));
         return pParent->mLeft;
       }
@@ -1325,12 +1309,12 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::FindLeaf(
       if (hint.mNode->mLeft == nullptr) {
         pParent = static_cast<node_base_type_ptr>(
             const_cast<node_type*>(hint.mNode));
-        return pParent->mLeft; // nullptr insert will then put it to the left
-                              // if key < hint or right if key == hint;
+        return pParent->mLeft;  // nullptr insert will then put it to the left
+                                // if key < hint or right if key == hint;
       } else {
         pParent = static_cast<node_base_type_ptr>(
             const_cast<node_type*>(prior.mNode));
-         return pParent->mRight; // nullptr
+         return pParent->mRight;  // nullptr
       }
     }
     // key < *prev(hint)
@@ -1427,7 +1411,7 @@ rbtree<Key, T, KeyOfT, Compare, Allocator>::DoCreateTree(
 #if JNSTL_EXCEPTIONS_ENABLED
   try {
 #endif
-  if(pSource->mRight)
+  if (pSource->mRight)
     pTop->mRight = DoCreateTree(sRight(pSource), pTop);
 
   pParent = pTop;

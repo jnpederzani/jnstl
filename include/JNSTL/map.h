@@ -206,8 +206,8 @@ class map {
 
   template<typename InputIterator>
   void
-  insert(InputIterator first,InputIterator last) {
-    mT.DoInsertUnique(first,last);
+  insert(InputIterator first, InputIterator last) {
+    mT.DoInsertUnique(first, last);
   }
 
   void
@@ -344,7 +344,7 @@ operator>=(const map<Key, Compare, Allocator>& x,
 template<typename Key, typename Compare, typename Allocator>
 inline void
 swap(map<Key, Compare, Allocator>& x, map<Key, Compare, Allocator>& y) {
- x.swap(y);
+  x.swap(y);
 }
 
 }  // namespace jnstl

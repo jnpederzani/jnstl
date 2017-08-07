@@ -54,7 +54,7 @@ adjust_heap(RandomIt first, Distance Idx, Distance heapSize,
      heaSize - 1. */
   if (rIdx == heapSize) {
     *(first + Idx) = LIB::move(*(first + lIdx));
-   Idx = lIdx;
+    Idx = lIdx;
   }
   /* pushed Idx to the bottom now put it back in at top to ensure proper head */
   jnstl::promote_heap(first, Idx, topIdx, LIB::move(val), comp);

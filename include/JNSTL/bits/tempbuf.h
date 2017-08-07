@@ -37,8 +37,8 @@ template<bool>
 struct uninitialized_construct_buf_impl {
   template<typename Pointer, typename ForwardIterator>
   static void
-  ucr(Pointer first,Pointer last, ForwardIterator it) {
-    if(first == last)
+  ucr(Pointer first, Pointer last, ForwardIterator it) {
+    if (first == last)
       return;
 
     Pointer cur = first;
@@ -48,7 +48,7 @@ struct uninitialized_construct_buf_impl {
       jnstl::Construct(LIB::addressof(*first), LIB::move(*it));
       Pointer prev = cur;
       ++cur;
-      for(; cur != last; ++cur, ++prev)
+      for (; cur != last; ++cur, ++prev)
         jnstl::Construct(LIB::addressof(*cur), LIB::move(*prev));
       *it = LIB::move(*prev);
 #if JNSTL_EXCEPTIONS_ENABLED

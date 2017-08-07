@@ -162,8 +162,8 @@ class multimap {
 
   template<typename InputIterator>
   void
-  insert(InputIterator first,InputIterator last) {
-    mT.DoInsertMulti(first,last);
+  insert(InputIterator first, InputIterator last) {
+    mT.DoInsertMulti(first, last);
   }
 
   void
@@ -299,8 +299,9 @@ operator>=(const multimap<Key, Compare, Allocator>& x,
 
 template<typename Key, typename Compare, typename Allocator>
 inline void
-swap(multimap<Key, Compare, Allocator>& x, multimap<Key, Compare, Allocator>& y) {
- x.swap(y);
+swap(multimap<Key, Compare, Allocator>& x,
+     multimap<Key, Compare, Allocator>& y) {
+  x.swap(y);
 }
 
 }  // namespace jnstl

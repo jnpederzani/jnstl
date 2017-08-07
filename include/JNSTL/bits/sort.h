@@ -155,7 +155,7 @@ unsafe_partition(RandomIt first, RandomIt last, RandomIt pivot, Compare comp) {
        the lower limit */
     while (comp(*pivot, *last))
       --last;
-    if (!(first<last)) /* Comparing iterators not the values pointed at */
+    if (!(first < last)) /* Comparing iterators not the values pointed at */
       return first;
     jnstl::iter_swap(first, last);
     ++first;

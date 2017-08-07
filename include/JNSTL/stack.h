@@ -128,7 +128,7 @@ class stack {
   validate() const {
     return c.validate();
   }
-}; // stack
+};  // stack
 
 template <typename T, typename Container>
 inline bool

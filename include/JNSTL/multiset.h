@@ -148,8 +148,8 @@ class multiset {
 
   template<typename InputIterator>
   void
-  insert(InputIterator first,InputIterator last) {
-    mT.DoInsertMulti(first,last);
+  insert(InputIterator first, InputIterator last) {
+    mT.DoInsertMulti(first, last);
   }
 
   void
@@ -285,9 +285,10 @@ operator>=(const multiset<Key, Compare, Allocator>& x,
 
 template<typename Key, typename Compare, typename Allocator>
 inline void
-swap(multiset<Key, Compare, Allocator>& x, multiset<Key, Compare, Allocator>& y) {
- x.swap(y);
+swap(multiset<Key, Compare, Allocator>& x,
+     multiset<Key, Compare, Allocator>& y) {
+  x.swap(y);
 }
 
-    }  // namespace jnstl
+}  // namespace jnstl
 #endif  // JNSTL_MULTISET_H_ //

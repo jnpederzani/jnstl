@@ -145,7 +145,7 @@ class queue {
   validate() const {
     return c.validate();
   }
-}; // queue
+};  // queue
 
 template <typename T, typename Container>
 inline bool
@@ -242,7 +242,7 @@ class priority_queue {
   priority_queue(InputIt first, InputIt last, const Compare& compare,
                  const Container& cont)
       : c{cont}, comp{compare} {
-    c.insert(c.end(),first, last);
+    c.insert(c.end(), first, last);
     jnstl::make_heap(c.begin(), c.end(), comp);
   }
 
@@ -251,7 +251,7 @@ class priority_queue {
                  const Compare& compare = Compare(),
                  Container&& cont = Container())
       : c{LIB::move(cont)}, comp{compare} {
-    c.insert(c.end(),first, last);
+    c.insert(c.end(), first, last);
     jnstl::make_heap(c.begin(), c.end(), comp);
   }
 
@@ -328,8 +328,7 @@ class priority_queue {
   validate() const {
     return c.validate() && jnstl::is_heap(c.begin(), c.end(), comp);
   }
-
-}; // priority_queue
+};  // priority_queue
 
 template <typename T, typename Container, typename Compare>
 inline void

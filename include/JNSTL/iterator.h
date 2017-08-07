@@ -150,7 +150,7 @@ class reverse_iterator
     return *this;
   }
 
-  reverse_iterator&
+  reverse_iterator
   operator++(int) {
     reverse_iterator tmp = *this;
     --mCurrent;
@@ -163,7 +163,7 @@ class reverse_iterator
     return *this;
   }
 
-  reverse_iterator&
+  reverse_iterator
   operator--(int) {
     reverse_iterator tmp = *this;
     ++mCurrent;
@@ -255,8 +255,7 @@ operator+(typename reverse_iterator<Iterator>::difference_type n,
 }
 
 template<typename Iterator, typename Container>
-class normal_iterator
-{
+class normal_iterator {
  protected:
   Iterator mIterator;
 
@@ -454,7 +453,7 @@ class move_iterator {
 
   typedef typename std::conditional<std::is_reference<base_ref>::value,
                                typename std::remove_reference<base_ref>::type&&,
-                               base_ref>::type		reference;
+                               base_ref>::type          reference;
 
   move_iterator()
       : mIterator() {}
@@ -710,6 +709,7 @@ inline InputIterator
 prev(InputIterator i,
      typename jnstl::iterator_traits<InputIterator>::difference_type n = 1) {
   jnstl::advance(i, -n);
+  return i;
 }
 
 }  // namespace jnstl

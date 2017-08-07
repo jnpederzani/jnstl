@@ -1,9 +1,10 @@
 #ifndef JNSTL_ALGORITHM_H_
 #define JNSTL_ALGORITHM_H_
 
+#include <string.h>
+
 #include <utility>
 #include <limits>
-#include <string.h>
 #include <functional>
 #include <cmath>
 
@@ -163,7 +164,7 @@ struct copy_move<true, false, random_access_iterator_tag> {
 };
 
 template <bool IsMove>
-struct copy_move<IsMove, false, random_access_iterator_tag> {
+struct copy_move<IsMove, true, random_access_iterator_tag> {
   template <typename Tp>
   static Tp*
   copy_m(const Tp* first, const Tp* last, Tp* d_first) {
@@ -298,7 +299,7 @@ struct copy_move_backward<true, false, random_access_iterator_tag> {
 };
 
 template <bool IsMove>
-struct copy_move_backward<IsMove, false, random_access_iterator_tag> {
+struct copy_move_backward<IsMove, true, random_access_iterator_tag> {
   template <typename Tp>
   static Tp*
   copy_move_b(const Tp* first, const Tp* last, Tp* d_last) {
@@ -423,7 +424,7 @@ equal_impl(II1 first1, II1 last1, II2 first2) {
                           && std::is_pointer<II2>::value
                           && std::is_same<ValueType1, ValueType2>::value);
 
-  return jnstl::equal_a<is_simple>::equal(first1, last1,first2);
+  return jnstl::equal_a<is_simple>::equal(first1, last1, first2);
 }
 
 /**
@@ -707,7 +708,7 @@ inline bool
 equal(InputIter1 first1, InputIter1 last1, InputIter2 first2,
       BinaryPredicate p) {
   for (; first1 != last1; ++first1, ++first2)
-    if (!bool(p(*first1, *first2)))
+    if (!static_cast<bool>(p(*first1, *first2)))
       return false;
   return true;
 }
@@ -732,7 +733,7 @@ equal(InputIter1 first1, InputIter1 last1, InputIter2 first2,
  * The merge is stable, for equivalent elements in the two original ranges,
  * the elements from the first range (preserving their original order) precede
  * the elements form the second range (preserving their original order).
- * Both input ranges must be sorted and the output ranfe must not overlap
+ * Both input ranges must be sorted and the output range must not overlap
  * with either of the input ranges.
  */
 template <typename InputIt1, typename InputIt2, typename OutputIt,

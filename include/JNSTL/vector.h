@@ -65,8 +65,8 @@ class vector : private VectorBase<T, Allocator> {
   typedef const T&                                const_reference;
   typedef pointer                                 iterator;
   typedef const_pointer                           const_iterator;
-  //  typedef jnstl::normal_iterator<pointer, vector>       iterator;
-  //typedef jnstl::normal_iterator<const_pointer, vector> const_iterator;
+  // typedef jnstl::normal_iterator<pointer, vector>       iterator;
+  // typedef jnstl::normal_iterator<const_pointer, vector> const_iterator;
   typedef jnstl::reverse_iterator<iterator>       reverse_iterator;
   typedef jnstl::reverse_iterator<const_iterator> const_reverse_iterator;
   typedef typename base_type::size_type           size_type;
@@ -712,7 +712,6 @@ inline typename vector<T, Allocator>::iterator
 vector<T, Allocator>::insert(const_iterator position,
                              std::initializer_list<value_type> il) {
   return DoInsert(position, il.begin(), il.end(), std::false_type());
-
 }
 
 template <typename T, typename Allocator>
@@ -911,7 +910,8 @@ vector<T, Allocator>::DoInsert(const_iterator position,
   if (n > 0)
     return DoInsertValues(position, static_cast<size_type>(n),
                           static_cast<value_type>(value));
-  else return iterator(position);
+  else
+    return iterator(position);
 }
 
 template <typename T, typename Allocator>

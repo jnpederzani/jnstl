@@ -41,7 +41,7 @@ struct pair {
   typedef T2           second_type;
   typedef pair<T1, T2>   this_type;
 
-   first_type first;
+  first_type first;
   second_type second;
 
   pair()
